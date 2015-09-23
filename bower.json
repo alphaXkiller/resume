@@ -1,0 +1,17 @@
+{
+  "name": "resume",
+  "version": "0.0.1",
+  "authors": [
+    "Franklin Huang <frankie0628@gmail.com>"
+  ],
+  "description": "my resume website",
+  "license": "ISC",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendors",
+    "test",
+    "tests"
+  ]
+}
