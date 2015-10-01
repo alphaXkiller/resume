@@ -1,4 +1,5 @@
-$(document).ready(function () {
+(function () {
 	var windowHeight = $(window).height();
-	$('#intro').height(windowHeight - 60);
-});
+	var introHeight = $('#intro').height(windowHeight - 60);
+	$('#intro-content').height(introHeight.height());
+})();

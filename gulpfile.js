@@ -6,7 +6,11 @@ var nodemon			=	require('gulp-nodemon');
 var browserSync = require('browser-sync').create();
 var	watch 			=	require('gulp-watch');
 
-// configure the jshint task
+var config = {
+	bootstrapDir: './public/vendors/bootstrap-sass',
+	publicDir: './public'
+};
+
 gulp.task('jshint', function () {
 	return gulp.src('public/js/**/*.js')
 		.pipe(jshint())
@@ -14,10 +18,13 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('sass', function () {
-	return gulp.src('source/scss/**/*.scss')
-		.pipe(sass())
+	return gulp.src('source/scss/styles.scss')
+		.pipe(sass({
+			outputStyle: 'compressed',
+			includePaths: [config.bootstrapDir + '/assets/stylesheets']
+		})
+			.on('error', sass.logError))
 		.pipe(gulp.dest('public/stylesheets'))
-		.pipe(browserSync.stream());
 });
 
 gulp.task('bs', function () {
@@ -27,7 +34,7 @@ gulp.task('bs', function () {
 	});
 })
 
-gulp.task('nodemon', function (cb) {
+gulp.task('nodemon', ['sass'], function (cb) {
 	var started = false;
 
 	return nodemon({
@@ -40,6 +47,7 @@ gulp.task('nodemon', function (cb) {
 		}
 	})
 })
+
 // configure which files to watch and what tasks to use on file changes
 gulp.task('serve', ['sass', 'jshint', 'nodemon'], function () {
 	gulp.watch('public/js/**/*.js', ['jshint']);

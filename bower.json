@@ -13,5 +13,9 @@
     "vendors",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.3.5",
+    "font-awesome": "fontawesome#~4.4.0"
+  }
 }

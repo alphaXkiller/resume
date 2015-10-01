@@ -17,6 +17,7 @@
   "devDependencies": {
     "browser-sync": "^2.9.4",
     "gulp": "^3.9.0",
+    "gulp-bower": "0.0.10",
     "gulp-jshint": "^1.11.2",
     "gulp-nodemon": "^2.0.4",
     "gulp-sass": "^2.0.4",

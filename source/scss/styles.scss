@@ -1,3 +1,6 @@
+@import "bootstrap";
+@ipmort "bootstrap/mixins";
+
 $primaryColor: #fff;
 
 body {
@@ -6,6 +9,10 @@ body {
 
 header {
 	margin-top: 5px;
+}
+
+button:focus,button:active{
+	outline: none !important;
 }
 
 .logo {
@@ -24,6 +31,13 @@ header {
 
 main{
 	#intro {
-		background-image: url('/img/1.jpg')
+		background-image: url('/img/1.jpg');
+		background-repeat: no-repeat;
+		overflow: hidden;
+		scroll: visible;
+	}
+
+	#eduAndEx{
+		background-image: url('/img/skills-background.jpg')
 	}
 }
