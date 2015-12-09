@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Franklin Huang</title>
+	<meta name='viewport' content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="vendors/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+</head>
+<body ng-app="myResume">
+	<header class="container-fluid">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<button class="nav-brand center-block logo">FH</button> 
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</header>
+
+	<main ng-controller="HomeCtrl">
+		<section id="intro" class="container">
+			<div class="col-md-6"></div>
+			<div id="intro-content" class="col-md-6">
+				<div class="jumbotron" style="height: 100%">
+					<h2>Hello.<br>I'm Franklin Huang</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum fringilla nisi finibus, dictum mauris a, facilisis elit. Mauris eget felis dolor. In tristique diam turpis, eu laoreet lectus viverra ac.</p>
+					<button class="btn btn-default btn-lg">
+						Download Resume 
+					</button>
+					<hr>
+				</div>
+			</div>
+		</section>
+		<section id="eduAndEx">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<h4><i class="fa fa-file-text-o fa-2x"></i>ABOUT ME</h4>
+						<p>Aenean gravida ligula vel mauris volutpat condimentum. Ut eu tortor suscipit, accumsan risus nec, finibus orci. Proin pretium augue at cursus ornare.
+
+						Curabitur condimentum nibh at suscipit interdum. Aenean ac cursus nunc. Phasellus rutrum consequat bibendum.
+
+						Ut in libero sit amet lectus feugiat iaculis. Cras condimentum lobortis nulla, id varius enims.</p>
+					</div>
+					<div class="col-md-4">
+						<h4><i class="fa fa-terminal fa-2x"></i>Tech Skills</h4>
+						<ul class="list-group">
+							<li class="list-group-item">
+								<h4 class="list-group-item-heading">Version Control Tool:</h4>
+								<p class="list-group-item-text">Git</p>
+							</li>
+							<li class="list-group-item">
+								<h4 class="list-group-item-heading">Project Management Software:</h4>
+								<p class="list-group-item-text">Jira</p>
+							</li>
+							<li class="list-group-item">
+								<h4 class="list-group-item-heading">Operating System / Web service</h4>
+								<p class="list-group-item-text">Windows, Mac OSX, Linux, AWS</p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-4">
+						<h4><i class="fa fa-code fa-2x"></i>Progarmming Language</h4>
+						<ul>
+							<li>C/C++</li>
+							<li>Javascript</li>
+							<li>Python</li>
+							<li>PHP</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<h4>
+							<i class="fa fa-graduation-cap fa-2x"></i>	EDUCATION
+						</h4>
+						<table class="table">
+							<tbody>
+								<tr class="row">
+									<td class="col-xs-3">2011 - 2015</td>
+									<td class="col-xs-9">
+										<p>University of Nevada, Las Vegas</p>
+										<p>(B.S. in Computer Science)</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-md-6">
+						<h4>
+							<i class="fa fa-briefcase fa-2x"></i>
+							EMPLOYMENT
+						</h4>
+						<table class="table">
+							<tbody>
+								<tr ng-repeat="ex in works" class="row">
+									<td class="col-xs-4">{{ex.time}}</td>
+									<td class="col-xs-8">
+										<h5>{{ex.company}}</h5>
+										<p>{{ex.position}}</p>
+										<p></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script src="vendors/jquery.min.js"></script>
+	<script src="vendors/angular.min.js"></script>
+	<script src="js/style.js"></script>
+	<script src="js/app.js"></script>
+	<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1152636054766545',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>
+</html>

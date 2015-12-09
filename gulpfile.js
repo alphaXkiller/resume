@@ -1,13 +1,16 @@
+"use strict";
+
 var gulp 				= require('gulp');
-var gutil				= require('gulp-util');
 var jshint			= require('gulp-jshint');
-var sass				= require('gulp-sass');
 var nodemon			=	require('gulp-nodemon');
 var browserSync = require('browser-sync').create();
-var	watch 			=	require('gulp-watch');
+var	less 				=	require('gulp-less');
+var minifyCSS		= require('gulp-minify-css');
+var livereload	= require('gulp-livereload');
+var path				= require('path');
 
 var config = {
-	bootstrapDir: './public/vendors/bootstrap-sass',
+	bootstrapDir: './public/vendors/bootstrap/less',
 	publicDir: './public'
 };
 
@@ -17,40 +20,37 @@ gulp.task('jshint', function () {
 		.pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('sass', function () {
-	return gulp.src('source/scss/styles.scss')
-		.pipe(sass({
-			outputStyle: 'compressed',
-			includePaths: [config.bootstrapDir + '/assets/stylesheets']
-		})
-			.on('error', sass.logError))
-		.pipe(gulp.dest('public/stylesheets'))
-});
-
-gulp.task('bs', function () {
-	browserSync.init({
-		file: ['public/**/*.*'],
-		server: 'public/'
-	});
+gulp.task( 'less', function() {
+	return gulp.src('./less/**/*.less')
+						.pipe(less({
+							paths: [path.join(__dirname, config.bootstrapDir)]
+						}))
+						.pipe(minifyCSS())
+						.pipe(gulp.dest('./public/stylesheets'));
 })
 
-gulp.task('nodemon', ['sass'], function (cb) {
-	var started = false;
+gulp.task('watch', function() {
+	livereload.listen();
+	gulp.watch('public/js/**/*.js', ['jshint']);
+	gulp.watch('less/**/*.less', ['less']);
+})
 
-	return nodemon({
-		script: 'app.js'
-	})
-	.on('start', function () {
-		if (!started){
-			cb();
-			started = true;
+gulp.task('nodemon', ['less'], function () {
+	nodemon({
+		tasks: ['less'],
+		script: 'app.js',
+		ext: 'js less',
+		env: {
+			'NODE_ENV': 'development'
 		}
+	})
+	.on('restart', function() {
+		console.log('Restarting Server...');
 	})
 })
 
 // configure which files to watch and what tasks to use on file changes
-gulp.task('serve', ['sass', 'jshint', 'nodemon'], function () {
-	gulp.watch('public/js/**/*.js', ['jshint']);
-	gulp.watch('source/scss/**/*.scss', ['sass']);
-	gulp.watch('public/*.html').on('change', browserSync.reload);
-});
+gulp.task('serve', ['nodemon']);
+
+function exitHandler() { process.exit(0); }
+process.once('SIGINT', exitHandler);
